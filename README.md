@@ -11,14 +11,14 @@ Ensure you have the following installed:
 
 ## Setup
 
-1. **Clone the Repository**
+1. Clone the Repository
 
    ```bash
    git clone https://github.com/aaryanshroff/cs348-group-project
    cd cs348-group-project
    ```
 
-2. **Run the Setup Script**
+2. Run the Setup Script
 
     ```bash
     ./setup.sh
