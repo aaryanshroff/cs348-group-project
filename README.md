@@ -4,10 +4,10 @@
 
 Ensure you have the following installed:
 
-- **Python 3.11+**
-- **pip**
-- **Node.js (v22+)**
-- **npm**
+- Python 3.11+
+- pip
+- Node.js (v22+)
+- npm
 
 ## Setup
 
