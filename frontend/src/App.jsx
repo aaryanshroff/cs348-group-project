@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Restaurants from './Restaurants';
 
-const App = () => {
+function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -20,8 +21,9 @@ const App = () => {
         <h1>CS 348 Group Project</h1>
         <p>{message || 'Loading...'}</p>
       </header>
+      <Restaurants />
     </div>
   );
 }
 
-export default App
+export default App;
