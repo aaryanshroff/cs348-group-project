@@ -67,6 +67,9 @@ function Restaurants() {
                             <th scope="col" className="px-6 py-3">Name</th>
                             <th scope="col" className="px-6 py-3">Phone</th>
                             <th scope="col" className="px-6 py-3">Address</th>
+                            <th scope="col" className="px-6 py-3">City</th>
+                            <th scope="col" className="px-6 py-3">State</th>
+                            <th scope="col" className="px-6 py-3">Zip Code</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,7 +85,10 @@ function Restaurants() {
                                     {restaurant.name}
                                 </th>
                                 <td className="px-6 py-4">{restaurant.phone}</td>
-                                <td className="px-6 py-4">{`${restaurant.address}, ${restaurant.city}, ${restaurant.state} ${restaurant.zip_code}`}</td>
+                                <td className="px-6 py-4">{restaurant.address}</td>
+                                <td className="px-6 py-4">{restaurant.city}</td>
+                                <td className="px-6 py-4">{restaurant.state}</td>
+                                <td className="px-6 py-4">{restaurant.zip_code}</td>
                             </tr>
                         ))}
                     </tbody>
