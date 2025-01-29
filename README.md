@@ -2,6 +2,8 @@
 
 ## Prerequisites
 
+This setup assumes a POSIX system.
+
 Ensure you have the following installed:
 
 - Python 3.11+
