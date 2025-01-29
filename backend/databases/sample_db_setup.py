@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS Users (
 
 # NOTABLE CONSTRAINTS:
 # The combination of name and address is unique, individually name and address are not unique
-# Average rating is a real number with 1 decimal place that is either between
-# 1 and 5 or is NULL in the case that no reviews exist for the restaurant.
+# Average rating is a real number 
+# 1 and 5 or is 0 in the case that no reviews exist for the restaurant.
 CREATE_RESTAURANTS_TABLE = """
 CREATE TABLE IF NOT EXISTS Restaurants (
     restaurant_id INTEGER PRIMARY KEY,
@@ -28,11 +28,11 @@ CREATE TABLE IF NOT EXISTS Restaurants (
     state TEXT NOT NULL,
     zip_code TEXT NOT NULL,
     phone TEXT NOT NULL UNIQUE,
-    avg_rating REAL DEFAULT NULL,
+    avg_rating REAL NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     UNIQUE (name, address)
-    CHECK ((avg_rating BETWEEN 1 AND 5) OR (avg_rating IS NULL)),
+    CHECK ((avg_rating BETWEEN 1 AND 5) OR (avg_rating IS 0)),
     CHECK (avg_rating = ROUND(avg_rating, 1))
 );
 """
