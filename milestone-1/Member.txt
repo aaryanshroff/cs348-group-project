@@ -3,13 +3,15 @@ Restaurant Review Social Network | CS 348 | Feb 7, 2025
 
 --- Aaryan Shroff ---
 Tasks:
-- SQL query for querying restaurants by search term (Status: In Progress)
+- R7ab: SQL query for querying restaurants by search term (Status: In Progress)
+- R16: Member.txt (Status: Completed)
+- C1: Readme (Status: Completed)
 - API route to GET all restaurants or a subset of restaurants based on search term (Status: Completed)
 - UI page for search bar and results table (Status: Completed)
 
 --- Diyar Ayad Yasin ---
 Tasks:
-- [Task 1] (Status: Completed/In Progress)
+- R3: Sample Dataset writeup and population script (Status: Completed)
 - [Task 2] (Status: Completed/In Progress)
 - [Task 3] (Status: Completed/In Progress)
 
@@ -21,6 +23,6 @@ Tasks:
 
 --- DongHoon Jeong ---
 Tasks:
-- [Task 1] (Status: Completed/In Progress)
-- [Task 2] (Status: Completed/In Progress)
-- [Task 3] (Status: Completed/In Progress)
+- R1, R2: High Level Description and System Decisions Writeups (Status: Completed)
+- R5: Schema Design and E/R diagrams (Status: In Progress)
+- R6ab: SQL query for adding restaurants and reviews (Status: In Progress)
