@@ -21,7 +21,13 @@ Ensure you have the following installed:
 2. Run the Setup Script
 
     ```bash
-    ./setup.sh
+    # MacOS / Linux
+    ./scripts/bash/setup.sh
+    ```
+
+    ```powershell
+    # Windows
+    .\scripts\powershell\setup.ps1
     ```
 
 ## Running the Application
@@ -29,13 +35,25 @@ Ensure you have the following installed:
 ### Backend
 Open a new terminal and run:
 ```bash
-./run_backend.sh
+# MacOS / Linux
+./scripts/bash/run_backend.sh
+```
+
+```powershell
+# Windows
+.\scripts\powershell\run_backend.ps1
 ```
 
 ### Frontend
 Open a new terminal and run:
 ```bash
-./run_frontend.sh
+# MacOS / Linux
+./scripts/bash/run_frontend.sh
+```
+
+```powershell
+# Windows
+.\scripts\powershell\run_frontend.ps1
 ```
 
 ## Supported Features
