@@ -1,4 +1,6 @@
 import sqlite3
+import os
+import sys # Explicitly exiting with error code allows us to catch failures in our setup script
 
 ############################ SQL QUERY DEFINITIONS ############################
 # For simplicity, we define the setup SQL queries in the same file as the setup script itself
@@ -99,10 +101,14 @@ CREATE TABLE IF NOT EXISTS Follows (
 );
 """
 
+CWD = os.getcwd()
+
+SAMPLE_DATASET = os.path.join( CWD, "sample_dataset.db" )
+
 ############################ SAMPLE DB SETUP ############################
 try:
     # Try connect to locally stored sample dataset
-    conn = sqlite3.connect( "sample_dataset.db" )
+    conn = sqlite3.connect( SAMPLE_DATASET )
     cursor = conn.cursor()
 
     # Setup all of the initial tables
@@ -114,8 +120,14 @@ try:
     cursor.execute( CREATE_FOLLOWS_TABLE )
 
     conn.commit()
-except sqlite3.Error as e:
-    print( f"FAILED setup error: {e}" )
-finally:
     if conn:
         conn.close()
+except sqlite3.Error as e:
+    print( f"FAILED: build_sample_db_schema.py: {e}" )
+
+    if conn:
+        conn.close()
+
+    sys.exit( 1 )
+
+sys.exit( 0 )
