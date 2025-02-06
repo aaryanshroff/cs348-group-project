@@ -18,7 +18,7 @@ CREATE TABLE Restaurants (
   zip_code TEXT,
   phone TEXT,
   created_at TEXT NOT NULL,
-  average_rating DECIMAL(3, 2) CHECK(average_rating BETWEEN 0 and 5),
+  average_rating DECIMAL(3, 2) CHECK(average_rating IS NULL OR average_rating = 0 OR average_rating BETWEEN 1 and 5)
 );
 
 CREATE TABLE RestaurantImages (
@@ -42,7 +42,7 @@ CREATE TABLE RestaurantTypeAssignments (
 CREATE TABLE Reviews (
   uid INT NOT NULL REFERENCES Users(uid),
   restaurant_id INT NOT NULL REFERENCES Restaurants(restaurant_id),
-  rating INT NOT NULL,
+  rating INT NOT NULL CHECK(rating BETWEEN 1 AND 5),
   review_text TEXT,
   created_at TEXT NOT NULL,
   PRIMARY KEY(uid, restaurant_id)
