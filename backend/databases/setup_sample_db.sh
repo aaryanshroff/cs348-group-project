@@ -24,7 +24,7 @@ echo "Populating sample database with data..."
 python ./sample_db_files/populate_sample_db.py
 if [ $? -ne 0 ]; then
     echo -e "Failed to populate sample database!\nWill try to destroy sample db before exiting!"
-    rm "$SAMPLE_DB_FILEPATH" 2> /dev/null
+    rm "$SAMPLE_DB_FILEPATH" 2> /dev/null # If SAMPLE_DB DNE it isn't a problem so don't print error msg
     exit 1
 fi
 
