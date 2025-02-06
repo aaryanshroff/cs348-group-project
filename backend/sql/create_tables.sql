@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Restaurants;
+DROP TABLE IF EXISTS RestaurantImages;
+DROP TABLE IF EXISTS RestaurantTypes;
+DROP TABLE IF EXISTS RestaurantTypeAssignments;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Followers;
+
 -- Create tables required by the application
 CREATE TABLE Users (
   uid INT NOT NULL PRIMARY KEY,
