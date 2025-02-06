@@ -34,6 +34,11 @@ INSERT INTO Follows (follower_id, followed_id, created_at)
 VALUES (?, ?, ?)
 """
 
+INSERT_RESTAURANTS_FTS_REBUILD = """
+-- Rebuilds the search index
+INSERT INTO restaurants_fts(restaurants_fts) VALUES('rebuild');
+"""
+
 CWD = os.getcwd()
 SAMPLE_DB_FILES = os.path.join( CWD, "sample_db_files" )
 
@@ -74,6 +79,8 @@ try:
             data = [tuple(row) for row in csv_reader]
             
             cursor.executemany( QUERIES[i], data )
+    
+    cursor.execute(INSERT_RESTAURANTS_FTS_REBUILD);
 
     conn.commit()
     if conn:
