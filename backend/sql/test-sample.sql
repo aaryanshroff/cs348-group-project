@@ -14,3 +14,44 @@ SELECT * FROM Reviews WHERE restaurant_id = 1;
 
 -- Finding the current user’s reviews for a restaurant:
 SELECT * FROM Reviews WHERE restaurant_id = 1 AND uid = 1;
+
+-- R7 List all restaurants and filter restaurants by city and type (Aaryan)
+
+-- 1. List all restaurants
+SELECT restaurant_id,
+    name,
+    address,
+    city,
+    state,
+    zip_code,
+    phone
+FROM Restaurants
+ORDER BY name;
+
+-- 2. Generate filter options
+SELECT DISTINCT(city)
+FROM Restaurants
+ORDER BY city;
+SELECT DISTINCT(type_name)
+FROM RestaurantTypes
+ORDER BY type_name;
+
+-- 3. List restaurants from city :city
+SELECT restaurant_id,
+    name,
+    address,
+    city,
+    state,
+    zip_code,
+    phone
+FROM Restaurants
+WHERE city = 'Phoenix';
+
+-- 4. List restaurants of type :type_name
+SELECT Restaurants.*
+FROM Restaurants
+INNER JOIN RestaurantTypesAssignments 
+  ON Restaurants.restaurant_id = RestaurantTypesAssignments.restaurant_id
+INNER JOIN RestaurantTypes 
+  ON RestaurantTypesAssignments.type_id = RestaurantTypes.type_id
+WHERE RestaurantTypes.type_name = 'augue';
