@@ -24,5 +24,5 @@ Tasks:
 --- DongHoon Jeong ---
 Tasks:
 - R1, R2: High Level Description and System Decisions Writeups (Status: Completed)
-- R5: Schema Design and E/R diagrams (Status: In Progress)
-- R6ab: SQL query for adding restaurants and reviews (Status: In Progress)
+- R5: Schema Design and E/R diagrams (Status: Completed)
+- R6ab: SQL query for adding restaurants and reviews (Status: Completed)

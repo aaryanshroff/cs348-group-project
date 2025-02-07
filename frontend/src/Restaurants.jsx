@@ -73,7 +73,7 @@ function Restaurants() {
                         </tr>
                     </thead>
                     <tbody>
-                        {restaurants.map(restaurant => (
+                        {restaurants.map((restaurant, index) => (
                             <tr
                                 key={restaurant.restaurant_id || index}
                                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"

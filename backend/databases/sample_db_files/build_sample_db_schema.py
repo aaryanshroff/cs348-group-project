@@ -101,6 +101,51 @@ CREATE TABLE IF NOT EXISTS Follows (
 );
 """
 
+# Full text search
+
+CREATE_RESTAURANTS_FTS_VTABLE = """
+-- Creates a virtual table for full-text search that mirrors the Restaurants table.
+-- Uses the 'content' option to reference existing data, avoiding duplication.
+-- 'content_rowid' links to the primary key of the source table.
+CREATE VIRTUAL TABLE restaurants_fts USING fts5(
+    name, 
+    address, 
+    city, 
+    state,
+    zip_code,
+    phone,
+    content='restaurants', 
+    content_rowid='restaurant_id'
+);
+"""
+
+CREATE_TRIGGER_RESTAURANTS_FTS_INSERT = """
+-- Trigger: Automatically updates FTS index when new restaurants are added.
+-- Inserts only the rowid - FTS5 automatically pulls content from source table.
+CREATE TRIGGER restaurants_ai AFTER INSERT ON restaurants BEGIN
+    INSERT INTO restaurants_fts(rowid) VALUES (new.restaurant_id);
+END;
+"""
+
+CREATE_TRIGGER_FTS_UPDATE = """
+-- Trigger: Handles updates to restaurant data by:
+-- 1. Deleting old FTS index entry (using FTS5's 'delete' command)
+-- 2. Adding new entry with updated data
+CREATE TRIGGER restaurants_au AFTER UPDATE ON restaurants BEGIN
+    INSERT INTO restaurants_fts(restaurants_fts, rowid) VALUES('delete', old.restaurant_id);
+    INSERT INTO restaurants_fts(rowid) VALUES (new.restaurant_id);
+END;
+"""
+
+
+CREATE_TRIGGER_FULL_TEXT_SEARCH_DELETE = """
+-- Trigger: Removes entries from FTS index when restaurants are deleted.
+-- Uses FTS5's internal 'delete' command rather than standard SQL DELETE.
+CREATE TRIGGER restaurants_ad AFTER DELETE ON restaurants BEGIN
+    INSERT INTO restaurants_fts(restaurants_fts, rowid) VALUES('delete', old.restaurant_id);
+END;
+"""
+
 CWD = os.getcwd()
 
 SAMPLE_DATASET = os.path.join( CWD, "sample_dataset.db" )
@@ -114,6 +159,13 @@ try:
     # Setup all of the initial tables
     cursor.execute( CREATE_USERS_TABLE )
     cursor.execute( CREATE_RESTAURANTS_TABLE )
+
+    # Full text search
+    cursor.execute( CREATE_RESTAURANTS_FTS_VTABLE )
+    cursor.execute( CREATE_TRIGGER_RESTAURANTS_FTS_INSERT )
+    cursor.execute( CREATE_TRIGGER_FTS_UPDATE )
+    cursor.execute( CREATE_TRIGGER_FULL_TEXT_SEARCH_DELETE )
+
     cursor.execute( CREATE_RESTAURANT_TYPES_TABLE )
     cursor.execute( CREATE_RESTAURANT_TYPES_ASSIGNMENTS_TABLE )
     cursor.execute( CREATE_REVIEWS_TABLE )
