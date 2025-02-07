@@ -10,18 +10,23 @@ VALUES (?, ?, ?, ?, ?, ?, ?)
 """
 
 INSERT_RESTAURANTS = """
-INSERT INTO Restaurants (restaurant_id, name, address, city, state, zip_code, phone, avg_rating, created_at)
+INSERT INTO Restaurants (restaurant_id, name, address, city, state, zip_code, phone, average_rating, created_at)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
-INSERT_RESTAURANT_TYPES = """
-INSERT INTO RestaurantTypes (type_id, type_name, created_at)
-VALUES (?, ?, ?)
+INSERT_RESTAURANT_IMAGES = """
+INSERT INTO RestaurantImages (image_id, restaurant_id, image_url, created_at)
+VALUES (?, ?, ?, ?)
 """
 
-INSERT_RESTAURANT_TYPES_ASSIGNMENTS = """
-INSERT INTO RestaurantTypesAssignments (restaurant_id, type_id, created_at)
-VALUES (?, ?, ?)
+INSERT_RESTAURANT_TYPES = """
+INSERT INTO RestaurantTypes (type_id, type_name)
+VALUES (?, ?)
+"""
+
+INSERT_RESTAURANT_TYPE_ASSIGNMENTS = """
+INSERT INTO RestaurantTypeAssignments (restaurant_id, type_id)
+VALUES (?, ?)
 """
 
 INSERT_REVIEWS = """
@@ -29,9 +34,9 @@ INSERT INTO Reviews (uid, restaurant_id, rating, review_text, created_at)
 VALUES (?, ?, ?, ?, ?)
 """
 
-INSERT_FOLLOWS = """
-INSERT INTO Follows (follower_id, followed_id, created_at)
-VALUES (?, ?, ?)
+INSERT_FOLLOWERS = """
+INSERT INTO Followers (uid, follower_id)
+VALUES (?, ?)
 """
 
 CWD = os.getcwd()
@@ -42,20 +47,22 @@ SAMPLE_CSV_DIR = os.path.join( SAMPLE_DB_FILES, "sample_csv_files" )
 
 csv_files = ['sample_users.csv',
              'sample_restaurants.csv',
+             'sample_restaurant_images.csv',
              'sample_restaurant_types.csv',
-             'sample_restaurant_types_assignments.csv',
+             'sample_restaurant_type_assignments.csv',
              'sample_reviews.csv',
-             'sample_follows.csv']
+             'sample_followers.csv']
 
 for i in range(len(csv_files)):
     csv_files[i] = os.path.join( SAMPLE_CSV_DIR, csv_files[i] )
 
 QUERIES = [INSERT_USERS,
            INSERT_RESTAURANTS,
+           INSERT_RESTAURANT_IMAGES,
            INSERT_RESTAURANT_TYPES,
-           INSERT_RESTAURANT_TYPES_ASSIGNMENTS,
+           INSERT_RESTAURANT_TYPE_ASSIGNMENTS,
            INSERT_REVIEWS,
-           INSERT_FOLLOWS]
+           INSERT_FOLLOWERS]
 
 # We only assert that every file has a corresponding query
 # Any file DNE, permissions, or syntactic errors should be caught in our try-catch
@@ -70,9 +77,7 @@ try:
     for i in range( len( csv_files ) ):
         with open( csv_files[i], 'r' ) as file:
             csv_reader = csv.reader( file )
-
             data = [tuple(row) for row in csv_reader]
-            
             cursor.executemany( QUERIES[i], data )
 
     conn.commit()
