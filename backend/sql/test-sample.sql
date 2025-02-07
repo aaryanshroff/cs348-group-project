@@ -55,3 +55,10 @@ INNER JOIN RestaurantTypesAssignments
 INNER JOIN RestaurantTypes 
   ON RestaurantTypesAssignments.type_id = RestaurantTypes.type_id
 WHERE RestaurantTypes.type_name = 'augue';
+
+-- 5. Get average rating of each restaurant
+SELECT
+    restaurant_id,
+    COALESCE( ROUND( avg( rating ) ), 0 ) AS avg_rating
+FROM Reviews
+GROUP BY restaurant_id;
