@@ -4,7 +4,7 @@ INSERT INTO Restaurants (name, address, city, state, zip_code, phone, avg_rating
 VALUES('McDonalds', '123 Rose St', 'Toronto', 'ON', '11111', '111-111-1111', 0.0);
 
 INSERT INTO RestaurantImages(image_id, restaurant_id, image_url)
-VALUES(1, 1, 'image_url');
+VALUES(999, 1, 'image_url');
 
 -- Adding a Review Query
 INSERT INTO Reviews (uid, restaurant_id, rating, review_text)
