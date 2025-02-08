@@ -60,16 +60,8 @@ Open a new terminal and run:
 
 ### Basic Features
 
-- **R7: Restaurant Search**  
-  Search mock restaurants using the following criteria:
-  - Name
-  - Phone number
-  - Address
-  - City
-  - State
-  - ZIP Code
+- **R7 - List all restaurants**
 
-  *🛠️ TODO: Database integration pending*
 
 ## Milestones
 
