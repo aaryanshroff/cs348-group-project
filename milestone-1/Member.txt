@@ -3,9 +3,9 @@ Restaurant Review Social Network | CS 348 | Feb 7, 2025
 
 --- Aaryan Shroff ---
 Tasks:
-- R7ab: SQL query for querying restaurants by search term (Status: In Progress)
+- R7ab: SQL query for querying restaurants by search term (Status: Completed)
 - R16: Member.txt (Status: Completed)
-- C1: Readme (Status: Completed)
+- C1: README (Status: Completed)
 - API route to GET all restaurants or a subset of restaurants based on search term (Status: Completed)
 - UI page for search bar and results table (Status: Completed)
 
