@@ -32,6 +32,15 @@ Ensure you have the following installed:
 
 ## Running the Application
 
+### Sample DB
+
+```bash
+cd backend/databases
+sqlite3 sample_dataset.db < ../sql/create_tables.sql
+python3 sample_db_files/populate_sample_db.py
+sqlite3 sample_dataset.db < ../sql/test-sample.sql > ../sql/test-sample.out
+```
+
 ### Backend
 Open a new terminal and run:
 ```bash
@@ -61,15 +70,3 @@ Open a new terminal and run:
 ### Basic Features
 
 - **R7 - List all restaurants**
-
-
-## Milestones
-
-### Milestone 1
-How to build and test sample DB:
-```bash
-cd backend/databases
-sqlite3 sample_dataset.db < ../sql/create_tables.sql
-python3 sample_db_files/populate_sample_db.py
-sqlite3 sample_dataset.db < ../sql/test-sample.sql > ../sql/test-sample.out
-```
