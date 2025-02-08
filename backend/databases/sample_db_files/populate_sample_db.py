@@ -10,7 +10,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?)
 """
 
 INSERT_RESTAURANTS = """
-INSERT INTO Restaurants (restaurant_id, name, address, city, state, zip_code, phone, average_rating, created_at)
+INSERT INTO Restaurants (restaurant_id, name, address, city, state, zip_code, phone, avg_rating, created_at)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
@@ -81,11 +81,13 @@ try:
 
     for i in range( len( csv_files ) ):
         with open( csv_files[i], 'r' ) as file:
+            print(f"Reading {csv_files[i]}")
             csv_reader = csv.reader( file )
             data = [tuple(row) for row in csv_reader]
             cursor.executemany( QUERIES[i], data )
-    
-    cursor.execute(INSERT_RESTAURANTS_FTS_REBUILD);
+        
+    # TODO: Fix FTS
+    # cursor.execute(INSERT_RESTAURANTS_FTS_REBUILD);
 
     conn.commit()
     if conn:
