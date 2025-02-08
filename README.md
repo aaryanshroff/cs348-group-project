@@ -1,4 +1,4 @@
-# CS 348 Group Project
+# MunchMate: CS 348 Group 17 Project
 
 ## Prerequisites
 
