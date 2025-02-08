@@ -1,6 +1,9 @@
 # Set error action to stop execution on errors
 $ErrorActionPreference = "Stop"
 
+# Save current directory so we can jump back here after this script finishes
+Push-Location
+
 # All paths relative to our backend directory
 Set-Location -Path "..\..\backend"
 
@@ -59,6 +62,8 @@ if ($REINIT_DB -eq "true") {
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Failed to build database schema! Will try to destroy DB before exiting."
         Remove-Item $DB_FILEPATH -ErrorAction SilentlyContinue
+        deactivate
+        Pop-Location
         exit 1
     }
 }
@@ -68,6 +73,8 @@ python "$DB_DIR\populate_sample_db.py"
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Failed to populate database! Will try to destroy DB before exiting."
     Remove-Item $DB_FILEPATH -ErrorAction SilentlyContinue
+    deactivate
+    Pop-Location
     exit 1
 }
 
@@ -78,3 +85,5 @@ python app.py
 
 # Deactivate the virtual environment
 deactivate
+
+Pop-Location

@@ -55,6 +55,7 @@ if [ "$REINIT_DB" ]; then
     if [ $? -ne 0 ]; then
         echo -e "Failed to build database schema!\nWill try to destroy db before exiting!"
         rm "$DB_FILEPATH" 2> /dev/null # If DB DNE it isn't a problem so don't print error msg
+        deactivate
         exit 1
     fi
 
@@ -65,6 +66,7 @@ python "$DB_DIR/populate_sample_db.py"
 if [ $? -ne 0 ]; then
     echo -e "Failed to populate database!\nWill try to destroy db before exiting!"
     rm "$DB_FILEPATH" 2> /dev/null # If DB DNE it isn't a problem so don't print error msg
+    deactivate
     exit 1
 fi
 
