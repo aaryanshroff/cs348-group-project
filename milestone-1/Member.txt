@@ -18,8 +18,8 @@ Tasks:
 --- Kevin Nguyen-Chau ---
 Tasks:
 - C2: SQL queries to create tables and constraints (Status: Completed)
-- R9ab: SQL query for login (Status: In Progress)
-- [Task 3] (Status: Completed/In Progress)
+- R9ab: SQL query for account creation and login (Status: Completed)
+- C5 (partial): Connect SQL to backend (Status: In Progress)
 
 --- DongHoon Jeong ---
 Tasks:
