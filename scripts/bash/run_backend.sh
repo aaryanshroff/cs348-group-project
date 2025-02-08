@@ -72,6 +72,6 @@ echo -e "\nSuccessfully initialized database!\n"
 
 
 echo "Starting Flask backend..."
-python3 app.py
+python app.py
 
 deactivate
