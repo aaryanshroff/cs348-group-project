@@ -27,7 +27,7 @@ def close_db(exception=None):
 def init_db() -> None:
     db = get_db()
 
-    with open('schema.sql') as f:
+    with open(os.path.join('sql', 'create_tables.sql')) as f:
         db.executescript(f.read().decode('utf8'))
 
 def init_app(app: Flask) -> None:

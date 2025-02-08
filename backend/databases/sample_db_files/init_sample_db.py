@@ -5,7 +5,7 @@ import sys
 CWD = os.getcwd()
 SAMPLE_DB = os.path.join(CWD, 'sample_dataset.db')
 SQL = 'sql'
-CREATE_TABLES = os.path.join(SQL, 'create_tables.sql')
+CREATE_TABLES = os.path.join('..', SQL, 'create_tables.sql')
 
 ############################ SAMPLE DB SETUP ############################
 try:

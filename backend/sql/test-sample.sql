@@ -63,3 +63,14 @@ SELECT
     COALESCE( ROUND( avg( rating ) ), 0 ) AS avg_rating
 FROM Reviews
 GROUP BY restaurant_id;
+
+-- R9 Create account and login
+-- Create account
+INSERT INTO Users (username, first_name, last_name, email, password_hash)
+VALUES('KevinIsCool', 'Kevin', 'Nguyen', 'asteroid.destroyer@gmail.com', '8inGIJogZE+su8Trdm1FcGXnyoLUu80vZhp8lv6LM64');
+
+-- Login
+SELECT username,
+    password_hash
+FROM Users
+WHERE username = 'KevinIsCool' AND password_hash = '8inGIJogZE+su8Trdm1FcGXnyoLUu80vZhp8lv6LM64';
