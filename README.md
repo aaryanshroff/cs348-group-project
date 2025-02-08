@@ -32,17 +32,29 @@ Ensure you have the following installed:
 
 ## Running the Application
 
+### Sample DB
+
+```bash
+cd backend/databases
+sqlite3 sample_dataset.db < ../sql/create_tables.sql
+python3 sample_db_files/populate_sample_db.py
+sqlite3 sample_dataset.db < ../sql/test-sample.sql > ../sql/test-sample.out
+```
+
 ### Backend
 Open a new terminal and run:
 ```bash
 # MacOS / Linux
-./scripts/bash/run_backend.sh
+DB_PATH="databases/sample_dataset.db" ./scripts/bash/run_backend.sh
 ```
 
 ```powershell
 # Windows
-.\scripts\powershell\run_backend.ps1
+$env:DB_PATH = "databases\sample_dataset.db"
+& .\scripts\powershell\run_backend.ps1
 ```
+
+`DB_PATH` is relative to `backend/app.py`.
 
 ### Frontend
 Open a new terminal and run:
@@ -60,13 +72,4 @@ Open a new terminal and run:
 
 ### Basic Features
 
-- **R7: Restaurant Search**  
-  Search mock restaurants using the following criteria:
-  - Name
-  - Phone number
-  - Address
-  - City
-  - State
-  - ZIP Code
-
-  *🛠️ TODO: Database integration pending*
+- **R7 - List all restaurants**

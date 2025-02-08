@@ -4,7 +4,7 @@ INSERT INTO Restaurants (name, address, city, state, zip_code, phone, avg_rating
 VALUES('McDonalds', '123 Rose St', 'Toronto', 'ON', '11111', '111-111-1111', 0.0);
 
 INSERT INTO RestaurantImages(image_id, restaurant_id, image_url)
-VALUES(1, 1, 'image_url');
+VALUES(999, 1, 'image_url');
 
 -- Adding a Review Query
 INSERT INTO Reviews (uid, restaurant_id, rating, review_text)
@@ -51,10 +51,10 @@ WHERE city = 'Phoenix';
 -- 4. List restaurants of type :type_name
 SELECT Restaurants.*
 FROM Restaurants
-INNER JOIN RestaurantTypesAssignments 
-  ON Restaurants.restaurant_id = RestaurantTypesAssignments.restaurant_id
+INNER JOIN RestaurantTypeAssignments 
+  ON Restaurants.restaurant_id = RestaurantTypeAssignments.restaurant_id
 INNER JOIN RestaurantTypes 
-  ON RestaurantTypesAssignments.type_id = RestaurantTypes.type_id
+  ON RestaurantTypeAssignments.type_id = RestaurantTypes.type_id
 WHERE RestaurantTypes.type_name = 'augue';
 
 -- 5. Get average rating of each restaurant
