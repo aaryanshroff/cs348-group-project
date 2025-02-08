@@ -51,10 +51,10 @@ WHERE city = 'Phoenix';
 -- 4. List restaurants of type :type_name
 SELECT Restaurants.*
 FROM Restaurants
-INNER JOIN RestaurantTypesAssignments 
-  ON Restaurants.restaurant_id = RestaurantTypesAssignments.restaurant_id
+INNER JOIN RestaurantTypeAssignments 
+  ON Restaurants.restaurant_id = RestaurantTypeAssignments.restaurant_id
 INNER JOIN RestaurantTypes 
-  ON RestaurantTypesAssignments.type_id = RestaurantTypes.type_id
+  ON RestaurantTypeAssignments.type_id = RestaurantTypes.type_id
 WHERE RestaurantTypes.type_name = 'augue';
 
 -- 5. Get average rating of each restaurant
