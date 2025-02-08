@@ -44,11 +44,13 @@ INSERT_RESTAURANTS_FTS_REBUILD = """
 INSERT INTO restaurants_fts(restaurants_fts) VALUES('rebuild');
 """
 
+# CWD will be backend/ as this script is run by ./run_backend.sh
+# which executes this script after running cd'ing into backend 
 CWD = os.getcwd()
-SAMPLE_DB_FILES = os.path.join( CWD, "sample_db_files" )
+SAMPLE_DB_DIR = os.path.join( CWD, 'databases', 'sample_db' )
 
-SAMPLE_DATASET = os.path.join( CWD, "sample_dataset.db" )
-SAMPLE_CSV_DIR = os.path.join( SAMPLE_DB_FILES, "sample_csv_files" )
+SAMPLE_DATASET = os.path.join( SAMPLE_DB_DIR, "sample_dataset.db" )
+SAMPLE_CSV_DIR = os.path.join( SAMPLE_DB_DIR, "sample_csv_files" )
 
 csv_files = ['sample_users.csv',
              'sample_restaurants.csv',
