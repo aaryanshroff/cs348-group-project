@@ -19,7 +19,6 @@ Tasks:
 Tasks:
 - C2: SQL queries to create tables and constraints (Status: Completed)
 - R9ab: SQL query for account creation and login (Status: Completed)
-- C5 (partial): Connect SQL to backend (Status: In Progress)
 
 --- DongHoon Jeong ---
 Tasks:
