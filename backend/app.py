@@ -38,9 +38,10 @@ def _list_restaurants(search_term: str | None = None) -> list[Restaurant]:
     sql_file = Path("queries") / "list_restaurants.sql"
     params = ()
 
-    if search_term:
-        sql_file = Path("queries") / "search_restaurants.sql"
-        params = (search_term,)
+    # TODO: Fix FTS
+    # if search_term:
+    #     sql_file = Path("queries") / "search_restaurants.sql"
+    #     params = (search_term,)
         
     query = sql_file.read_text(encoding="utf-8")
     rows = db.query_db(query, args=params)
