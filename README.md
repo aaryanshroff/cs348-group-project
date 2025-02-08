@@ -70,3 +70,14 @@ Open a new terminal and run:
   - ZIP Code
 
   *🛠️ TODO: Database integration pending*
+
+## Milestones
+
+### Milestone 1
+How to build and test sample DB:
+```bash
+cd backend/databases
+sqlite3 sample_dataset.db < ../sql/create_tables.sql
+python3 sample_db_files/populate_sample_db.py
+sqlite3 sample_dataset.db < ../sql/test-sample.sql > ../sql/test-sample.out
+```
