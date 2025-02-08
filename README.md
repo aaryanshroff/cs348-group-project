@@ -35,22 +35,25 @@ Ensure you have the following installed:
 ### Sample DB
 
 ```bash
-cd backend/databases
-sqlite3 sample_dataset.db < ../sql/create_tables.sql
-python3 sample_db_files/populate_sample_db.py
-sqlite3 sample_dataset.db < ../sql/test-sample.sql > ../sql/test-sample.out
+cd scripts/bash
+./run_backend.sh
+```
+Open a new terminal and run:
+```bash
+cd backend/databases/sample_db
+sqlite3 sample_dataset.db < ../../sql/test-sample.sql > ../../sql/test-sample.out
 ```
 
 ### Backend
 Open a new terminal and run:
 ```bash
 # MacOS / Linux
-DB_PATH="databases/sample_dataset.db" ./scripts/bash/run_backend.sh
+DB_PATH="databases/sample_db/sample_dataset.db" ./scripts/bash/run_backend.sh
 ```
 
 ```powershell
 # Windows
-$env:DB_PATH = "databases\sample_dataset.db"
+$env:DB_PATH = "databases\sample_db\sample_dataset.db"
 & .\scripts\powershell\run_backend.ps1
 ```
 
