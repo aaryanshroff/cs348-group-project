@@ -38,17 +38,12 @@ function Restaurants() {
     }, [searchTerm]);
 
     return (
-        <div>
-            <form className="max-w-md mx-auto">
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
+        <div className="container">
+            <form className="my-4">
+                <div className="input-group input-group-lg">
                     <input
                         type="search"
-                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="form-control"
                         placeholder="Search Restaurants..."
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
@@ -57,38 +52,37 @@ function Restaurants() {
             </form>
 
             {isLoading && <p>Loading...</p>}
-            {error && <p className="text-red-800">{error}</p>}
+            {error && <div className="alert alert-danger">{error}</div>}
 
-            <div class="relative overflow-x-auto">
-
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <div className="table-responsive">
+                <table className="table table-hover">
+                    <thead className="thead-light">
                         <tr>
-                            <th scope="col" className="px-6 py-3">Name</th>
-                            <th scope="col" className="px-6 py-3">Phone</th>
-                            <th scope="col" className="px-6 py-3">Address</th>
-                            <th scope="col" className="px-6 py-3">City</th>
-                            <th scope="col" className="px-6 py-3">State</th>
-                            <th scope="col" className="px-6 py-3">Zip Code</th>
+                            <th scope="col" className="p-3">Name</th>
+                            <th scope="col" className="p-3">Phone</th>
+                            <th scope="col" className="p-3">Address</th>
+                            <th scope="col" className="p-3">City</th>
+                            <th scope="col" className="p-3">State</th>
+                            <th scope="col" className="p-3">Zip Code</th>
                         </tr>
                     </thead>
                     <tbody>
                         {restaurants.map((restaurant, index) => (
                             <tr
                                 key={restaurant.restaurant_id || index}
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                                className="border-bottom"
                             >
                                 <th
                                     scope="row"
-                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    className="font-weight-bold text-nowrap p-3"
                                 >
                                     {restaurant.name}
                                 </th>
-                                <td className="px-6 py-4">{restaurant.phone}</td>
-                                <td className="px-6 py-4">{restaurant.address}</td>
-                                <td className="px-6 py-4">{restaurant.city}</td>
-                                <td className="px-6 py-4">{restaurant.state}</td>
-                                <td className="px-6 py-4">{restaurant.zip_code}</td>
+                                <td className="p-3">{restaurant.phone}</td>
+                                <td className="p-3">{restaurant.address}</td>
+                                <td className="p-3">{restaurant.city}</td>
+                                <td className="p-3">{restaurant.state}</td>
+                                <td className="p-3">{restaurant.zip_code}</td>
                             </tr>
                         ))}
                     </tbody>
