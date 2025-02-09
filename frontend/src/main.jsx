@@ -8,6 +8,7 @@ import Restaurants from './Restaurants.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+      {/* https://reactrouter.com/start/library/routing */}
       <Routes>
         <Route path="/" element={<Restaurants />} />
       </Routes>
