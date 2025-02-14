@@ -1,8 +1,8 @@
-from dataclasses import dataclass
 from datetime import datetime
+from typing import TypedDict
 
-@dataclass
-class Restaurant:
+
+class Restaurant(TypedDict):
     restaurant_id: int
     name: str
     address: str
@@ -11,6 +11,11 @@ class Restaurant:
     zip_code: str
     phone: str
     created_at: datetime
+
+
+class RestaurantType(TypedDict):
+    type_id: int
+    type_name: str
 
 
 MOCK_RESTAURANTS = [
@@ -22,7 +27,7 @@ MOCK_RESTAURANTS = [
         state="NY",
         zip_code="10001",
         phone="212-555-1234",
-        created_at=datetime(2025, 1, 28)
+        created_at=datetime(2025, 1, 28),
     ),
     Restaurant(
         restaurant_id=2,
@@ -32,6 +37,6 @@ MOCK_RESTAURANTS = [
         state="CA",
         zip_code="90001",
         phone="213-555-5678",
-        created_at=datetime(2025, 1, 28)
+        created_at=datetime(2025, 1, 28),
     ),
 ]
