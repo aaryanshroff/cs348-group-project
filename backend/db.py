@@ -48,4 +48,4 @@ def query_db(sql_file: Path, args=(), one=False):
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
-    return (rv[0] if rv else None) if one else rv
+    return (dict(rv[0]) if rv else None) if one else [dict(row) for row in rv]

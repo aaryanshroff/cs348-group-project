@@ -3,7 +3,7 @@ from pathlib import Path
 import db
 from flask import Flask, request
 from flask_cors import CORS
-from models.restaurant import Restaurant
+from models.restaurant import Restaurant, RestaurantType
 
 app = Flask(__name__)
 db.init_app(app)
@@ -31,6 +31,12 @@ def get_restaurants():
         return {"error": str(e)}, 500
 
 
+def _list_types() -> list[RestaurantType]:
+    sql_file = Path("queries") / "list_types.sql"
+
+    return db.query_db(sql_file)
+
+
 def _list_restaurants(search_term: str | None = None) -> list[Restaurant]:
     sql_file = Path("queries") / "list_restaurants.sql"
     params = ()
@@ -40,8 +46,7 @@ def _list_restaurants(search_term: str | None = None) -> list[Restaurant]:
     #     sql_file = Path("queries") / "search_restaurants.sql"
     #     params = (search_term,)
 
-    rows = db.query_db(sql_file, args=params)
-    return [dict(row) for row in rows]
+    return db.query_db(sql_file, args=params)
 
 
 if __name__ == "__main__":
