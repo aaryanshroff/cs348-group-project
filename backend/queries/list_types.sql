@@ -1,2 +1,2 @@
-SELECT DISTINCT type_name
+SELECT *
 FROM RestaurantTypes;
