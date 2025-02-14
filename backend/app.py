@@ -31,12 +31,6 @@ def get_restaurants():
         return {"error": str(e)}, 500
 
 
-def _list_types() -> list[RestaurantType]:
-    sql_file = Path("queries") / "list_types.sql"
-
-    return db.query_db(sql_file)
-
-
 def _list_restaurants(search_term: str | None = None) -> list[Restaurant]:
     sql_file = Path("queries") / "list_restaurants.sql"
     params = ()
@@ -47,6 +41,22 @@ def _list_restaurants(search_term: str | None = None) -> list[Restaurant]:
     #     params = (search_term,)
 
     return db.query_db(sql_file, args=params)
+
+
+@app.get("/api/types")
+def get_types():
+    try:
+        results = _list_types()
+        return {"data": results}, 200
+    except Exception as e:
+        print(f"{type(e).__name__}({e})")
+        return {"error": str(e)}, 500
+
+
+def _list_types() -> list[RestaurantType]:
+    sql_file = Path("queries") / "list_types.sql"
+
+    return db.query_db(sql_file)
 
 
 if __name__ == "__main__":
