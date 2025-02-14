@@ -28,16 +28,16 @@ SAMPLE_DB_FILEPATH="$SAMPLE_DB_DIR/sample_dataset.db"
 PROD_DB_FILEPATH="$PROD_DB_DIR/prod_dataset.db"
 
 DB_DIR=""
-DB_FILEPATH=""
+export DB_FILEPATH=""
 
 if [ "$DB_TYPE" = "sample" ]; then
     echo "Using sample database."
     DB_DIR="$SAMPLE_DB_DIR"
-    DB_FILEPATH="$SAMPLE_DB_FILEPATH"
+    export DB_FILEPATH="$SAMPLE_DB_FILEPATH"
 else
     echo "Using production database."
     DB_DIR="$PROD_DB_DIR"
-    DB_FILEPATH="$PROD_DB_FILEPATH"
+    export DB_FILEPATH="$PROD_DB_FILEPATH"
 fi
 
 if [ ! -f .venv/bin/activate ]; then
