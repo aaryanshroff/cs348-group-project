@@ -2,8 +2,9 @@
 
 set -e
 
+# Assume running from project root
 # All paths relative to our backend dir
-cd ../../backend
+cd backend
 
 # Environment Variables
 #
@@ -39,6 +40,11 @@ else
     DB_FILEPATH="$PROD_DB_FILEPATH"
 fi
 
+if [ ! -f .venv/bin/activate ]; then
+    echo ".venv not found. Please run setup.sh"
+    exit 1
+fi
+
 source .venv/bin/activate
 
 # Initalize the backend database
@@ -51,7 +57,7 @@ if [ "$REINIT_DB" ]; then
     fi
 
     echo "Building database schema..."
-    python3 "$DB_DIR/init_sample_db.py"
+    python "$DB_DIR/init_sample_db.py"
     if [ $? -ne 0 ]; then
         echo -e "Failed to build database schema!\nWill try to destroy db before exiting!"
         rm "$DB_FILEPATH" 2> /dev/null # If DB DNE it isn't a problem so don't print error msg
@@ -62,7 +68,7 @@ if [ "$REINIT_DB" ]; then
 fi
 
 echo -e "Populating database with data...\n"
-python3 "$DB_DIR/populate_sample_db.py"
+python "$DB_DIR/populate_sample_db.py"
 if [ $? -ne 0 ]; then
     echo -e "Failed to populate database!\nWill try to destroy db before exiting!"
     rm "$DB_FILEPATH" 2> /dev/null # If DB DNE it isn't a problem so don't print error msg
@@ -74,6 +80,6 @@ echo -e "\nSuccessfully initialized database!\n"
 
 
 echo "Starting Flask backend..."
-python3 app.py
+python app.py
 
 deactivate
