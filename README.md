@@ -48,16 +48,13 @@ sqlite3 sample_dataset.db < ../../sql/test-sample.sql > ../../sql/test-sample.ou
 Open a new terminal and run:
 ```bash
 # MacOS / Linux
-DB_PATH="databases/sample_db/sample_dataset.db" ./scripts/bash/run_backend.sh
+./scripts/bash/run_backend.sh
 ```
 
 ```powershell
 # Windows
-$env:DB_PATH = "databases\sample_db\sample_dataset.db"
-& .\scripts\powershell\run_backend.ps1
+.\scripts\powershell\run_backend.ps1
 ```
-
-`DB_PATH` is relative to `backend/app.py`.
 
 ### Frontend
 Open a new terminal and run:
