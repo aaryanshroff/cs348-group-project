@@ -26,7 +26,7 @@ def get_restaurants():
         search_term = request.args.get("q", "").strip()
 
         types_param = request.args.get("types")
-        type_ids = types_param.split(",") if types_param is not None else []
+        type_ids = types_param.split(",") if types_param else []
 
         results = _list_restaurants(search_term, type_ids)
 
@@ -39,18 +39,24 @@ def get_restaurants():
 def _list_restaurants(
     search_term: str = "", type_ids: list[int] = []
 ) -> list[Restaurant]:
-    sql_file = Path("queries") / "list_restaurants.sql"
-    params = []
+    if len(type_ids) == 0:
+        sql_file = Path("queries") / "list_restaurants.sql"
+        return db.query_db_from_file(sql_file)
+
+    placeholders = ", ".join(["?"] * len(type_ids))
+
+    sql_file = Path("queries") / "filter_restaurants.sql"
+    # NOT SQL injection b/c we only substitute with X number of ?
+    # ? substitution is handled by SQLite engine
+    query = sql_file.read_text(encoding="utf-8").format(placeholders=placeholders)
+    print(query)
+
+    return db.query_db(query, tuple(type_ids))
 
     # TODO: Fix FTS
     # if search_term:
     #     sql_file = Path("queries") / "search_restaurants.sql"
     #     params = (search_term,)
-
-    if len(type_ids) > 0:
-        params.append(type_ids)
-
-    return db.query_db_from_file(sql_file, args=params)
 
 
 @app.get("/api/types")
