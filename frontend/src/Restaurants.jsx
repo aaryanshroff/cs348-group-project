@@ -6,6 +6,7 @@ function Restaurants() {
     const [searchTerm, setSearchTerm] = useState("");
     const [restaurants, setRestaurants] = useState([]);
     const [types, setTypes] = useState([]);
+    const [selectedTypes, setSelectedTypes] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -17,6 +18,7 @@ function Restaurants() {
                 const response = await axios.get("/api/restaurants", {
                     params: {
                         q: searchTerm,
+                        types: selectedTypes.join(","),
                     },
                 });
 
@@ -37,7 +39,7 @@ function Restaurants() {
         }
 
         fetchRestaurants();
-    }, [searchTerm]);
+    }, [searchTerm, selectedTypes]);
 
     useEffect(() => {
         async function fetchTypes() {
@@ -96,6 +98,24 @@ function Restaurants() {
                                     class="form-check-input"
                                     type="checkbox"
                                     value={type.type_id}
+                                    checked={selectedTypes.includes(
+                                        type.type_id
+                                    )}
+                                    onChange={(e) => {
+                                        const typeId = Number(e.target.value);
+                                        if (e.target.checked) {
+                                            setSelectedTypes([
+                                                ...selectedTypes,
+                                                typeId,
+                                            ]);
+                                        } else {
+                                            setSelectedTypes(
+                                                selectedTypes.filter(
+                                                    (id) => id !== typeId
+                                                )
+                                            );
+                                        }
+                                    }}
                                 />
                                 <label class="form-check-label">
                                     {type.type_name}
