@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import sqlite3
 
 from flask import Flask, g
@@ -39,10 +40,11 @@ def init_app(app: Flask) -> None:
     app.teardown_appcontext(close_db)
 
 
-def query_db(query, args=(), one=False):
+def query_db(sql_file: Path, args=(), one=False):
     """
     Query function that combines getting the cursor, executing and fetching the results.
     """
+    query = sql_file.read_text(encoding="utf-8")
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
