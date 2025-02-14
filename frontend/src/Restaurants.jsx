@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Restaurants() {
-    const [searchTerm, setSearchTerm] = useState('');
+    // TODO: Different error and isLoading state for restaurants vs types
+    const [searchTerm, setSearchTerm] = useState("");
     const [restaurants, setRestaurants] = useState([]);
+    const [types, setTypes] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -12,13 +14,13 @@ function Restaurants() {
             try {
                 setIsLoading(true);
 
-                const response = await axios.get('/api/restaurants', {
+                const response = await axios.get("/api/restaurants", {
                     params: {
-                        q: searchTerm
-                    }
+                        q: searchTerm,
+                    },
                 });
 
-                const isOk = response.status >= 200 && response.status < 300
+                const isOk = response.status >= 200 && response.status < 300;
                 if (!isOk) {
                     // `error` field defined by the backend
                     setError(response.error);
@@ -37,6 +39,30 @@ function Restaurants() {
         fetchRestaurants();
     }, [searchTerm]);
 
+    useEffect(() => {
+        async function fetchTypes() {
+            try {
+                const response = await axios.get("/api/types");
+
+                const isOk = response.status >= 200 && response.status < 300;
+                if (!isOk) {
+                    // `error` field defined by the backend
+                    setError(response.error);
+                    return;
+                }
+
+                const { data } = response.data;
+                console.log(data);
+                setTypes(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+            }
+        }
+
+        fetchTypes();
+    }, []);
+
     return (
         <div className="container">
             <form className="my-4">
@@ -46,10 +72,41 @@ function Restaurants() {
                         className="form-control"
                         placeholder="Search Restaurants..."
                         value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
             </form>
+
+            <div className="dropdown">
+                <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                >
+                    Filter by cuisine
+                </button>
+                <ul className="dropdown-menu">
+                    {types.length > 0 ? (
+                        types.map((type) => (
+                            <li
+                                key={type.type_id}
+                                className="d-grid d-flex mx-2 p-1 gap-2"
+                            >
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value={type.type_id}
+                                />
+                                <label class="form-check-label">
+                                    {type.type_name}
+                                </label>
+                            </li>
+                        ))
+                    ) : (
+                        <li>Loading...</li>
+                    )}
+                </ul>
+            </div>
 
             {isLoading && <p>Loading...</p>}
             {error && <div className="alert alert-danger">{error}</div>}
@@ -58,13 +115,27 @@ function Restaurants() {
                 <table className="table table-hover">
                     <thead className="thead-light">
                         <tr>
-                            <th scope="col" className="p-3">Name</th>
-                            <th scope="col" className="p-3">Phone</th>
-                            <th scope="col" className="p-3">Address</th>
-                            <th scope="col" className="p-3">City</th>
-                            <th scope="col" className="p-3">State</th>
-                            <th scope="col" className="p-3">Zip Code</th>
-                            <th scope="col" className="p-3">Type</th>
+                            <th scope="col" className="p-3">
+                                Name
+                            </th>
+                            <th scope="col" className="p-3">
+                                Phone
+                            </th>
+                            <th scope="col" className="p-3">
+                                Address
+                            </th>
+                            <th scope="col" className="p-3">
+                                City
+                            </th>
+                            <th scope="col" className="p-3">
+                                State
+                            </th>
+                            <th scope="col" className="p-3">
+                                Zip Code
+                            </th>
+                            <th scope="col" className="p-3">
+                                Type
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
