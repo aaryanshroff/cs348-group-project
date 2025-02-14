@@ -40,12 +40,19 @@ def init_app(app: Flask) -> None:
     app.teardown_appcontext(close_db)
 
 
-def query_db(sql_file: Path, args=(), one=False):
+def query_db_from_file(sql_file: Path, args=()):
+    """
+    Execute query from `sql_file` and return all rows.
+    """
+    query = sql_file.read_text(encoding="utf-8")
+    return query_db(query, args)
+
+
+def query_db(query: str, args=()):
     """
     Query function that combines getting the cursor, executing and fetching the results.
     """
-    query = sql_file.read_text(encoding="utf-8")
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
-    return (dict(rv[0]) if rv else None) if one else [dict(row) for row in rv]
+    return [dict(row) for row in rv]
